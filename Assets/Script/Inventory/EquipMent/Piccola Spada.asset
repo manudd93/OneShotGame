@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b685c557b603144d92e070d9b9b2bea, type: 3}
+  m_Name: Piccola Spada
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentData
+  itemName: Spada piccola
+  description: piccola spada per provare a difenderti
+  isStackable: 0
+  maxStackSize: 0
+  consumeOnUse: 0
+  onlyOnMap: 0
+  icon: {fileID: 6336450945293585900, guid: 9837033d50227b8479869c5533ba4fcb, type: 3}
+  "rarit\xE0": 0
+  itemType: 1
+  ID: 0
+  RecoverHealt: 0
+  DamageOnUse: 0
+  damage: 7
+  defense: 0
+  maxHealt: 0
+  OneShot: 0
+  "Abilit\xE0": 0
+  critico: 0
+  Forza: 0
+  "Vitalit\xE0": 0
+  Mente: 0
+  "Velocit\xE0": 0
+  "Rapidit\xE0": 0
+  equipSlot: 0
+  stats:
+  - statName: Attacco
+    value: 4
+  - statName: Difesa
+    value: 0
+  - statName: velocita
+    value: 0

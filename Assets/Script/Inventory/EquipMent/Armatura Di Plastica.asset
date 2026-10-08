@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b685c557b603144d92e070d9b9b2bea, type: 3}
+  m_Name: Armatura Di Plastica
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentData
+  itemName: Armatura Di plastica
+  description: Non aspettarti chissa che difesa
+  isStackable: 0
+  maxStackSize: 0
+  consumeOnUse: 0
+  onlyOnMap: 0
+  icon: {fileID: 3925036097884938726, guid: e05571f9de77eef43870781b1b7474ff, type: 3}
+  "rarit\xE0": 0
+  itemType: 2
+  ID: 0
+  RecoverHealt: 0
+  DamageOnUse: 0
+  damage: 0
+  defense: 6
+  maxHealt: 30
+  OneShot: 0
+  "Abilit\xE0": 0
+  critico: 0
+  Forza: 0
+  "Vitalit\xE0": 0
+  Mente: 0
+  "Velocit\xE0": 0
+  "Rapidit\xE0": 0
+  equipSlot: 1
+  stats: []
