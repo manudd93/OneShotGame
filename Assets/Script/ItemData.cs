@@ -34,6 +34,13 @@ public enum ConsumableType
     
 
 }
+public enum SkillType
+{
+    Damage,
+    Heal,
+    Passive
+
+}
 
 public enum Rarity
 {

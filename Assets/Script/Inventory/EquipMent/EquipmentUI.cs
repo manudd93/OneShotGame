@@ -15,6 +15,7 @@ public class EquipmentUI : MonoBehaviour
     [SerializeField] private InventorySlotUI weaponSlotUI;
     [SerializeField] private InventorySlotUI armorSlotUI;
     [SerializeField] private InventorySlotUI accessorySlotUI;
+    [SerializeField] private InventorySlotUI SkillSlot;
 
     private void OnEnable()
     {
@@ -29,6 +30,7 @@ public class EquipmentUI : MonoBehaviour
         weaponSlotUI.Init(0, _ => OnSlotClicked(EquipSlotType.Weapon));
         armorSlotUI.Init(0, _ => OnSlotClicked(EquipSlotType.Armor));
         accessorySlotUI.Init(0, _ => OnSlotClicked(EquipSlotType.Accessory));
+        SkillSlot.Init(0, _ => OnSlotClicked(EquipSlotType.Skill));
 
         equipmentManager.OnEquipmentChanged += RefreshSlot;
 
@@ -46,6 +48,7 @@ public class EquipmentUI : MonoBehaviour
         RefreshSlot(EquipSlotType.Weapon);
         RefreshSlot(EquipSlotType.Armor);
         RefreshSlot(EquipSlotType.Accessory);
+        RefreshSlot(EquipSlotType.Skill);
     }
 
     private void RefreshSlot(EquipSlotType slot)
@@ -59,6 +62,7 @@ public class EquipmentUI : MonoBehaviour
             case EquipSlotType.Weapon: weaponSlotUI.SetData(item, quantity); break;
             case EquipSlotType.Armor: armorSlotUI.SetData(item, quantity); break;
             case EquipSlotType.Accessory: accessorySlotUI.SetData(item, quantity); break;
+            case EquipSlotType.Skill: SkillSlot.SetData(item, quantity); break;
         }
     }
 

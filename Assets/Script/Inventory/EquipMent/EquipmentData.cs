@@ -5,7 +5,8 @@ public enum EquipSlotType
 {
     Weapon,
     Armor,
-    Accessory
+    Accessory,
+    Skill
 }
 
 /// <summary>
@@ -23,7 +24,7 @@ public struct StatValue
 /// Oggetto equipaggiabile: arma, armatura o accessorio.
 /// Crealo da: Create > Inventory > Equipment Item
 /// </summary>
-[CreateAssetMenu(fileName = "NuovoEquip", menuName = "Inventario/Equipaggiamento")]
+[CreateAssetMenu(fileName = "NuovoEquip", menuName = "Inventario/Equipaggiamento/Skill")]
 public class EquipmentData : ItemMaking
 {
     [Header("Equipaggiamento")]

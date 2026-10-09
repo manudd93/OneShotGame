@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public ItemMaking itemConsumable;
     public EquipmentData itemEquip;
     public EquipmentData armorEquip;
+    public EquipmentData SkillEquip;
     ConsumableManager consumableManager;
 
 
@@ -70,6 +71,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             inventoryManager.AddItem(itemConsumable);
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            popupUI.Show(SkillEquip, equipmentManager, inventoryManager);
+            
         }
     }
 

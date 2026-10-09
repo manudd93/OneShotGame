@@ -13,8 +13,9 @@ public class CombatManager : MonoBehaviour
     bool isDeadPlayer;
    public GameObject EnemyField;
   [SerializeField] EnemyStats enemyStats;
-  
-
+    //public InventorySlotUI SlotSkill;
+    [SerializeField] EquipmentManager equipmentManager;
+    public EquipmentData SkillEquip;
 
 
     // Start is called before the first frame update
@@ -54,7 +55,10 @@ public class CombatManager : MonoBehaviour
      
         
     }
-
+    public void UseSkill()
+    {
+        
+    }
     void EnemyMessage()
     {
         

@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public int baseDamageMin, baseDamageMax;
     public int baseDefense;
     public int baseHealt;
+    public int baseAbilita;
+    public int baseSpeed;
     [SerializeField] TextMeshProUGUI ForzaText;
     [SerializeField] TextMeshProUGUI VitalitaText;
     [SerializeField] TextMeshProUGUI VelocitaText;
@@ -84,6 +86,8 @@ public class Player : MonoBehaviour
         baseDamageMax = MaxDamage;
         baseDefense = Difesa;
         baseHealt = MaxHealt;
+        baseAbilita = Abilita;
+        baseSpeed = Rapidita;
         // textMessage.WriteText(HeroName + " inizia la sua avventura...");
        // MaxHealtBar.fillAmount = MaxHealt;
 
@@ -152,6 +156,7 @@ public class Player : MonoBehaviour
         RecoverHealt(20);
         Rapidita += speed;
         Difesa += defense;
+        maxBar = MaxHealt;
         UpdateText();
         
         
@@ -175,13 +180,23 @@ public class Player : MonoBehaviour
     
     public void UpdateText()
     {
+        ForzaText.text = forza.ToString();
+        VitalitaText.text = vitalita.ToString();
+        MenteText.text = mente.ToString();
+        VelocitaText.text = velocita.ToString();
         CurrentHealtText.text = Healt.ToString();
         MaxHealtText.text = MaxHealt.ToString();
         DamageMinText.text = MinDamage.ToString();
         DamageMaxText.text = MaxDamage.ToString();
         RapiditaText.text = Rapidita.ToString();
         DifesaText.text = Difesa.ToString();
+        maxBar = MaxHealt;
         CurrentHealtBar.fillAmount = Healt / maxBar;
+      
+        
+        AbilitaText.text = Abilita.ToString();
+        OneShotText.text = Oneshot.ToString();
+        CriticoText.text = Critico.ToString();
 
 
     }

@@ -26,6 +26,10 @@ public class ItemMaking : ScriptableObject
     public int RecoverHealt;
     public int DamageOnUse;
     public ConsumableType tipoConsumabile;
+    [Header("Impostazione Abilita")]
+    public SkillType tipoSkill;
+   public int value;
+    
     [Header("Statistiche")]
     public int damage;
     public int defense;
