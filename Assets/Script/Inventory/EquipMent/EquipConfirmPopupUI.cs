@@ -29,6 +29,7 @@ public class EquipConfirmPopupUI : MonoBehaviour
     private EquipmentManager equipmentManager;
     private InventoryManager inventoryManager; // per rimettere il vecchio oggetto nell'inventario
     private EquipmentData pendingItem;
+    [SerializeField] GameManager gameManager;
 
     private void Awake()
     {
@@ -148,7 +149,11 @@ public class EquipConfirmPopupUI : MonoBehaviour
 
         EquipmentData previous = equipmentManager.Equip(pendingItem);
 
-        // Se c'era gia' qualcosa equipaggiato in quello slot, torna nell'inventario a 8 slot
+        // Se c'era gia' qualcosa equipaggiato in quello slot, torna nell'inventario a 8 sloti
+        if (pendingItem.equipSlot==EquipSlotType.Skill)
+        {
+            gameManager.SetSkill(pendingItem);
+        }
         if (previous != null && inventoryManager != null)
         {
             inventoryManager.AddItem(previous, 1);

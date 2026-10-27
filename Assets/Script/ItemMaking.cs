@@ -29,7 +29,8 @@ public class ItemMaking : ScriptableObject
     [Header("Impostazione Abilita")]
     public SkillType tipoSkill;
    public int value;
-    
+    public int SkillID;
+   
     [Header("Statistiche")]
     public int damage;
     public int defense;

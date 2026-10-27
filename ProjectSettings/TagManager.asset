@@ -29,6 +29,7 @@ TagManager:
   - GrabItemBox
   - ItemDescription
   - ItemVfx
+  - VillageCamera
   layers:
   - Default
   - TransparentFX
@@ -36,7 +37,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Transition
   - 
   - 
   - 
@@ -65,6 +66,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Buildings
+    uniqueID: 705796303
+    locked: 0
+  - name: Decorazione
+    uniqueID: 3183023483
+    locked: 0
+  - name: NPC
+    uniqueID: 418061595
+    locked: 0
+  - name: Player
+    uniqueID: 280444369
     locked: 0
   m_RenderingLayers:
   - Default

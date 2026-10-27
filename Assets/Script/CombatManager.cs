@@ -11,12 +11,12 @@ public class CombatManager : MonoBehaviour
     LevelManager levelManager;
     int EnemySelected;
     bool isDeadPlayer;
-   public GameObject EnemyField;
-  [SerializeField] EnemyStats enemyStats;
+    public GameObject EnemyField;
+    [SerializeField] EnemyStats enemyStats;
     //public InventorySlotUI SlotSkill;
     [SerializeField] EquipmentManager equipmentManager;
     public EquipmentData SkillEquip;
-
+    [SerializeField] SkillManager skillManager;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,7 @@ public class CombatManager : MonoBehaviour
        gameManager= GameObject.FindObjectOfType<GameManager>();
         player = GameObject.FindAnyObjectByType<Player>();
         levelManager = GameObject.FindAnyObjectByType<LevelManager>();
+        
 
      //  gameManager.Battle();
 
@@ -31,7 +32,10 @@ public class CombatManager : MonoBehaviour
     }
 
     // Update is called once per frame
-
+    public void SetSkill(EquipmentData skill)
+    {
+        SkillEquip = skill;
+    }
    public void BattleStart()
     {
         state = BattleState.START;
@@ -55,10 +59,35 @@ public class CombatManager : MonoBehaviour
      
         
     }
+    public void OnSkillUse()
+    {
+
+        skillManager.UseSkill(SkillEquip);
+        state = BattleState.WAITING;
+
+    }
+
     public void UseSkill()
     {
+       StartCoroutine(PlayerSkillDamage());
         
     }
+
+    IEnumerator PlayerSkillDamage()
+    {
+        gameManager.WriteMessage(player.HeroName + "utilizza "+SkillEquip.itemName);
+        yield return new WaitForSeconds(2f);
+        enemyStats.TakeDamage(PlayerCalculateSkillDamage());
+        TimerWait.EseguiDopo(2f, StartEnemyTurn);
+
+    }
+
+    int PlayerCalculateSkillDamage()
+    {
+        int FinaleDamage = SkillEquip.value + player.Abilita;
+        return FinaleDamage;
+    }
+    
     void EnemyMessage()
     {
         

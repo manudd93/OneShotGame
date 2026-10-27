@@ -7,7 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public int AttoNumber;
-    public GameState currentState=GameState.Idle;
+    public GameState currentState = GameState.Idle;
     public List<NpcManager> NumeroNpc = new List<NpcManager>();
     public List<EnemyManager> NumeroNemici = new List<EnemyManager>();
     public int Gold;
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public float intervallo = 2f; // Secondi di attesa
     [SerializeField] int RandomEventQuest;
     [SerializeField] int RandomEventNpc;
- 
+
     [SerializeField] int RandomEventGold;
     [SerializeField] int RandomEventEnemy;
     [SerializeField] int RandomEventNull;
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public int SelectedEnemy;
     public GameObject PanelCommand;
     public GameObject PanelCombat;
+    public GameObject PanelHome;
     CombatManager combatManager;
     InventoryManager inventoryManager;
     EquipmentManager equipmentManager;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     public EquipmentData armorEquip;
     public EquipmentData SkillEquip;
     ConsumableManager consumableManager;
+    [SerializeField] RoomManager roomManager;
 
 
 
@@ -76,6 +78,44 @@ public class GameManager : MonoBehaviour
         {
             popupUI.Show(SkillEquip, equipmentManager, inventoryManager);
             
+        }
+    }
+    public void CheckChangeRoom(string room)
+    {
+        if (room == "village")
+        {
+            if (currentState == GameState.Idle)
+            {
+                roomManager.ChangeRoom(room);
+            }
+        }
+    }
+
+    public void ChangePanel(int panel)
+    {
+        switch (panel)
+        {
+            case 1:
+                PanelCommand.gameObject.SetActive(true);
+                PanelCombat.gameObject.SetActive(false);
+                PanelHome.gameObject.SetActive(false);
+                break;
+
+            case 2:
+
+                    PanelCommand.gameObject.SetActive(false);
+                    PanelCombat.gameObject.SetActive(true);
+                    PanelHome.gameObject.SetActive(false);
+               
+                break;
+            case 3:
+                if (currentState == GameState.Idle)
+                {
+                    PanelCommand.gameObject.SetActive(false);
+                    PanelCombat.gameObject.SetActive(false);
+                    PanelHome.gameObject.SetActive(true);
+                }
+                break;
         }
     }
 
@@ -188,8 +228,7 @@ public class GameManager : MonoBehaviour
         currentState = GameState.CombatMode;
 
         combatManager.BattleStart();
-        PanelCommand.SetActive(false);
-        PanelCombat.SetActive(true);
+        ChangePanel(2);
         
 
     }
@@ -268,6 +307,10 @@ public class GameManager : MonoBehaviour
     public void UseConsumable(ItemMaking item, int index)
     {
         consumableManager.UseConsumable(item , index);
+    }
+    public void SetSkill(EquipmentData skill)
+    {
+        combatManager.SetSkill(skill);
     }
 
 }
