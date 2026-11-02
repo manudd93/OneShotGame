@@ -29,7 +29,9 @@ public class Player : MonoBehaviour
     public bool isDie;
     GameManager gameManager;
     public Animator anim;
-
+    public EquipmentData ArmaDati;
+    WeaponInstance weapon;
+    public int LevelArma;
 
     // Start is called before the first frame update
     void Start()
@@ -164,6 +166,7 @@ public class Player : MonoBehaviour
     
     public void UpdateStatsEquip(EquipmentData newEquip)
     {
+        
         this.MaxDamage = baseDamageMax + newEquip.damage;
         this.MinDamage = baseDamageMin + newEquip.damage;
         this.Difesa += newEquip.defense;
@@ -176,6 +179,38 @@ public class Player : MonoBehaviour
         this.Rapidita += newEquip.Rapidità;
         this.MaxHealt += newEquip.maxHealt;
         UpdateText();
+        NewEquip(newEquip);
+    }
+    public void ReUpdateWeaponUpgraded(EquipmentData newEquip)
+    {
+
+        this.MaxDamage = baseDamageMax + newEquip.levels[weapon.Level].Damage;
+        this.MinDamage = baseDamageMin + newEquip.levels[weapon.Level].Damage;
+        this.Difesa += newEquip.defense;
+        this.Oneshot += newEquip.OneShot;
+        this.forza += newEquip.Forza;
+        this.vitalita += newEquip.Vitalità;
+        this.velocita += newEquip.Velocità;
+        this.mente += newEquip.Mente;
+        this.Critico += newEquip.critico;
+        this.Rapidita += newEquip.Rapidità;
+        this.MaxHealt += newEquip.maxHealt;
+        UpdateText();
+        
+    }
+    void NewEquip(EquipmentData newEquip)
+    {
+        weapon = new WeaponInstance(newEquip);
+        LevelArma = weapon.Level;
+        ArmaDati = newEquip;
+    }
+    public WeaponInstance PrendiDati()
+    {
+        return weapon;
+    }
+    public EquipmentData PrendiDato()
+    {
+        return ArmaDati;
     }
     
     public void UpdateText()

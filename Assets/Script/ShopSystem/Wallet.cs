@@ -3,14 +3,38 @@ using System;
 
 public class Wallet : MonoBehaviour
 {
-    public int Coins { get; private set; } = 500;
+    public int Gold = 500;
+    [SerializeField] GameManager gameManager;
     public event Action<int> OnChanged;
 
     public bool TrySpend(int amount)
     {
-        if (Coins < amount) return false;
-        Coins -= amount;
-        OnChanged?.Invoke(Coins);
+        if (Gold < amount) return false;
+        Gold -= amount;
+        OnChanged?.Invoke(Gold);
+        gameManager.RefreshGold();
         return true;
+       
+    }
+
+    public int GetGold()
+    {
+        return Gold;
+    }
+
+    public void AddGold(int amount)
+    {
+        Gold += amount;
+        gameManager.RefreshGold();
+    }
+
+    public void RemoveGold(int amount)
+    {
+        Gold -= Gold;
+        if (Gold <= 0)
+        {
+            Gold = 0;
+        }
+        gameManager.RefreshGold();
     }
 }

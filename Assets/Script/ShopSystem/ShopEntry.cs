@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShopEntry
 {
     public ItemShopData item;
+    public EquipmentData itemEquip;
     public bool limitedStock;
     [Min(1)] public int stock = 1;
 

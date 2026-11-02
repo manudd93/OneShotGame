@@ -62,7 +62,14 @@ public class EquipConfirmPopupUI : MonoBehaviour
 
         panelRoot.SetActive(true);
     }
+   public void BuyEquipment(EquipmentData newItemBuy, EquipmentManager equipmentManager, InventoryManager inventoryManager)
+    {
+        this.pendingItem = newItemBuy;
+        this.equipmentManager = equipmentManager;
+        this.inventoryManager = inventoryManager;
+        ConfirmEquip();
 
+    }
     public void CalculateRarity(Rarity rarità)
     {
         switch (rarità)

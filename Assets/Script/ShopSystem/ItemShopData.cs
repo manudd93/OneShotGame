@@ -1,12 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Shop/Item")]
-public class ItemShopData : ScriptableObject
+public class ItemShopData : ItemMaking
 {
-    public string id;
+    [Header("Impostazione Shop")]
     public string displayName;
-    [TextArea] public string description;
-    public Sprite icon;
     public int price;
 }
 

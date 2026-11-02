@@ -43,6 +43,7 @@ public class ItemMaking : ScriptableObject
     public int Mente;
     public int Velocità;
     public int Rapidità;
+  
     public virtual void Use(GameObject user)
     {
         Debug.Log($"Uso l'oggetto: {itemName}");

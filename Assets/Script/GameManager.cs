@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     public GameObject PanelCommand;
     public GameObject PanelCombat;
     public GameObject PanelHome;
+    public GameObject PanelArmeria;
+    public GameObject PanelBottega;
+    public GameObject PanelUpgradeWeapon;
     CombatManager combatManager;
     InventoryManager inventoryManager;
     EquipmentManager equipmentManager;
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
     public EquipmentData SkillEquip;
     ConsumableManager consumableManager;
     [SerializeField] RoomManager roomManager;
+    [SerializeField] Wallet wallet;
 
 
 
@@ -55,6 +59,7 @@ public class GameManager : MonoBehaviour
         GoldText = GameObject.FindGameObjectWithTag("GoldText").GetComponent<TextMeshProUGUI>();
         int npcSelected = UnityEngine.Random.Range(0,NumeroNpc.Capacity);
         Debug.Log(npcSelected);
+        GoldText.text = wallet.GetGold().ToString();
     }
 
     // Update is called once per frame
@@ -250,17 +255,17 @@ public class GameManager : MonoBehaviour
     }
     public void AddGold(int gold)
     {
-        Gold += gold;
-        GoldText.text = Gold.ToString();
+        wallet.AddGold(gold);
 
     }
     public void RemoveGold(int gold)
     {
-        Gold -= gold;
-        if (Gold <= 0){
-            Gold = 0;
-            }
-        GoldText.text = Gold.ToString();
+        wallet.RemoveGold(gold);
+    }
+
+    public void RefreshGold()
+    {
+        GoldText.text = wallet.GetGold().ToString();
     }
     public void NpcExecute()
     {
@@ -313,6 +318,39 @@ public class GameManager : MonoBehaviour
         combatManager.SetSkill(skill);
     }
 
+    public void CloseBottega()
+    {
+        PanelBottega.SetActive(false);
+    }
+    public void CloseArmeria()
+    {
+        PanelArmeria.SetActive(false);
+    }
+
+    public void OpenPanelBottega()
+    {
+        PanelArmeria.SetActive(false);
+        PanelBottega.SetActive(true);
+
+    }
+    public void OpenPanelArmeria()
+    {
+        PanelArmeria.SetActive(true);
+        PanelBottega.SetActive(false);
+    }
+
+    public void OpenUpgradePanel()
+    {
+        PanelUpgradeWeapon.gameObject.SetActive(true);
+        PanelBottega.SetActive(false);
+        PanelArmeria.SetActive(false);
+    }
+    public void ClosePanelUpgrade()
+    {
+        PanelUpgradeWeapon.SetActive(false);
+        PanelBottega.SetActive(false);
+        PanelArmeria.SetActive(true);
+    }
 }
 
 

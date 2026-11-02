@@ -24,7 +24,11 @@ MonoBehaviour:
   ID: 0
   RecoverHealt: 0
   DamageOnUse: 0
-  damage: 15
+  tipoConsumabile: 0
+  tipoSkill: 0
+  value: 0
+  SkillID: 0
+  damage: 11
   defense: 0
   maxHealt: 0
   OneShot: 0
@@ -38,4 +42,25 @@ MonoBehaviour:
   equipSlot: 0
   stats:
   - statName: Attacco
-    value: 15
+    value: 11
+  levels:
+  - Damage: 16
+    UpgradeCost: 15
+  - Damage: 20
+    UpgradeCost: 22
+  - Damage: 25
+    UpgradeCost: 36
+  - Damage: 31
+    UpgradeCost: 45
+  - Damage: 36
+    UpgradeCost: 60
+  - Damage: 41
+    UpgradeCost: 80
+  - Damage: 47
+    UpgradeCost: 110
+  - Damage: 59
+    UpgradeCost: 150
+  - Damage: 72
+    UpgradeCost: 200
+  - Damage: 110
+    UpgradeCost: 320

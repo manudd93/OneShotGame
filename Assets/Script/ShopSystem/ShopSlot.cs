@@ -31,7 +31,7 @@ public class ShopSlot : MonoBehaviour
         if (stockText)
         {
             stockText.gameObject.SetActive(entry.limitedStock);
-            stockText.text = soldOut ? "Esaurito" : $"Rimasti: {entry.Remaining}";
+            stockText.text = soldOut ? "Esaurito" : $" {entry.Remaining}";
         }
     }
 }

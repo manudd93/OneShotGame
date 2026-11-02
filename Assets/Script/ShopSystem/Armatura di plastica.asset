@@ -9,22 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b685c557b603144d92e070d9b9b2bea, type: 3}
-  m_Name: Piccola Spada
-  m_EditorClassIdentifier: Assembly-CSharp::EquipmentData
-  itemName: Spada piccola
-  description: piccola spada per provare a difenderti
+  m_Script: {fileID: 11500000, guid: 9fed82c26242d7f429da292518953945, type: 3}
+  m_Name: Armatura di plastica
+  m_EditorClassIdentifier: Assembly-CSharp::ItemShopData
+  itemName: 
+  description: 
   isStackable: 0
   maxStackSize: 0
   consumeOnUse: 0
   onlyOnMap: 0
-  icon: {fileID: 6336450945293585900, guid: 9837033d50227b8479869c5533ba4fcb, type: 3}
+  icon: {fileID: 3925036097884938726, guid: e05571f9de77eef43870781b1b7474ff, type: 3}
   "rarit\xE0": 0
-  itemType: 1
+  itemType: 2
   ID: 0
   RecoverHealt: 0
   DamageOnUse: 0
-  damage: 7
+  tipoConsumabile: 0
+  tipoSkill: 0
+  value: 0
+  SkillID: 0
+  damage: 0
   defense: 0
   maxHealt: 0
   OneShot: 0
@@ -35,11 +39,5 @@ MonoBehaviour:
   Mente: 0
   "Velocit\xE0": 0
   "Rapidit\xE0": 0
-  equipSlot: 0
-  stats:
-  - statName: Attacco
-    value: 4
-  - statName: Difesa
-    value: 0
-  - statName: velocita
-    value: 0
+  displayName: Armatura di plastrca
+  price: 55

@@ -30,6 +30,7 @@ public class EquipmentData : ItemMaking
     [Header("Equipaggiamento")]
     public EquipSlotType equipSlot;
     public List<StatValue> stats = new List<StatValue>();
+    public WeaponLevel[] levels;
 
     /// <summary>Ritorna il valore di una statistica per nome (0 se non presente).</summary>
     public float GetStat(string statName)
@@ -38,4 +39,10 @@ public class EquipmentData : ItemMaking
             if (s.statName == statName) return s.value;
         return 0f;
     }
+}
+[System.Serializable]
+public struct WeaponLevel
+{
+    public int Damage;
+    public int UpgradeCost;
 }
