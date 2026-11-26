@@ -16,13 +16,13 @@ MonoBehaviour:
   description: 'Ripristina 35hp '
   isStackable: 1
   maxStackSize: 5
-  consumeOnUse: 0
+  consumeOnUse: 1
   onlyOnMap: 0
   icon: {fileID: 5836865504383201385, guid: 6360b4235c7c8b04d982f171517c972f, type: 3}
   "rarit\xE0": 0
   itemType: 0
-  ID: 0
-  RecoverHealt: 0
+  ID: 1
+  RecoverHealt: 35
   DamageOnUse: 0
   tipoConsumabile: 0
   tipoSkill: 0
@@ -40,4 +40,4 @@ MonoBehaviour:
   "Velocit\xE0": 0
   "Rapidit\xE0": 0
   displayName: 'Pozione Inferiore '
-  price: 35
+  price: 45

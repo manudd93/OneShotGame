@@ -17,16 +17,29 @@ public class CombatManager : MonoBehaviour
     [SerializeField] EquipmentManager equipmentManager;
     public EquipmentData SkillEquip;
     [SerializeField] SkillManager skillManager;
+    [SerializeField] Animator anim;
+    [Header("Movimento Player")]
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float stopDistance = 1.5f;
+    [Header("Posizione Player")]
+    [SerializeField] private float attackDuration = 1f;
 
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+    public bool playerBasicAttackAction=false;
+    public bool playerReturnBase = false;
+    [SerializeField] Animator AnimEnemy;
     // Start is called before the first frame update
     void Start()
     {
        gameManager= GameObject.FindObjectOfType<GameManager>();
         player = GameObject.FindAnyObjectByType<Player>();
         levelManager = GameObject.FindAnyObjectByType<LevelManager>();
-        
+        startPosition = player.transform.position;
+        startRotation = player.transform.rotation;
 
-     //  gameManager.Battle();
+
+        //  gameManager.Battle();
 
         // BattleStart();
     }
@@ -46,11 +59,12 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-         Instantiate(gameManager.NumeroNemici[EnemySelected].vfxEnemy,EnemyField.transform.position,Quaternion.identity);
+        GameObject EnemyCreate= Instantiate(gameManager.NumeroNemici[EnemySelected].vfxEnemy,EnemyField.transform.position,Quaternion.identity);
 
         //gameManager.WriteMessage("Inizia il combattimento con " + gameManager.NumeroNemici[EnemySelected].EnemyName);
 
         enemyStats = Object.FindAnyObjectByType<EnemyStats>();
+        AnimEnemy = EnemyCreate.GetComponent<Animator>();
         yield return new WaitForSeconds(2f);
 
         //gameManager.WriteMessage("Nemico: " + gameManager.NumeroNemici[EnemySelected].Message);
@@ -141,7 +155,9 @@ public class CombatManager : MonoBehaviour
             return;
         state = BattleState.WAITING;
 
-       StartCoroutine(PlayerNormalAttack());
+        //StartCoroutine(PlayerNormalAttack());
+          //StartCoroutine(AttackEnemy(EnemyField.transform));
+        playerBasicAttackAction = true;
 
 
 
@@ -152,8 +168,54 @@ public class CombatManager : MonoBehaviour
     {
         int damage = Random.Range(player.MinDamage,player.MaxDamage);
         return damage;
+       
     }
-    IEnumerator PlayerNormalAttack()
+
+    private void Update()
+    {
+        if (playerBasicAttackAction)
+        {
+            anim.SetBool("run", true);
+            Vector2 dir = (EnemyField.transform.position - player.transform.position);
+            player.transform.position = Vector2.MoveTowards(player.transform.position, EnemyField.transform.position, moveSpeed * Time.deltaTime);
+            if(Vector2.Distance(player.transform.position, EnemyField.transform.position) < stopDistance)
+            {
+                anim.SetBool("run", false);
+                Debug.Log("distanza raggiunta");
+                anim.SetTrigger("attack");
+                playerBasicAttackAction = false;
+            }
+        }
+        if (playerReturnBase)
+        {
+            Vector2 dir = (startPosition - player.transform.position);
+
+            
+
+            player.transform.position = Vector2.MoveTowards(player.transform.position, startPosition, (moveSpeed+7) * Time.deltaTime);
+            if (Vector2.Distance(player.transform.position, startPosition) < 0.01f)
+            {
+                playerReturnBase = false;
+                Debug.Log("distanza raggiunta");
+                anim.SetBool("run", false);
+                player.transform.position = startPosition;
+
+            }
+        }
+    }
+
+
+    public void PlayerExtecuteBasickAttack()
+    {
+        enemyStats.TakeDamage(PlayerCalculateBasicAttack());
+        playerReturnBase = true;
+        TimerWait.EseguiDopo(2f, StartEnemyTurn);
+
+    }
+
+   
+//------- vecchio metodo---
+IEnumerator PlayerNormalAttack()
     {
         gameManager.WriteMessage(player.HeroName + " attacca " + gameManager.NumeroNemici[EnemySelected].EnemyName + "..."); ;
 
@@ -184,7 +246,9 @@ public class CombatManager : MonoBehaviour
     {
 
         int damage = Random.Range(gameManager.NumeroNemici[EnemySelected].minDamage, gameManager.NumeroNemici[EnemySelected].MaxDamage);
+        AnimEnemy.SetTrigger("Attack");
         return damage;
+
     }
     IEnumerator EnemyTurn()
     {

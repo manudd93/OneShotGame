@@ -39,10 +39,14 @@ public class GameManager : MonoBehaviour
     public EquipmentData itemEquip;
     public EquipmentData armorEquip;
     public EquipmentData SkillEquip;
+    public float GameSpeed = 2f;
     ConsumableManager consumableManager;
     [SerializeField] RoomManager roomManager;
     [SerializeField] Wallet wallet;
-
+    bool fast = false;
+    [SerializeField] GenerateNPC generateNPC;
+    public Transform SearchSpawn;
+    GameObject currentNPC;
 
 
     // Start is called before the first frame update
@@ -131,9 +135,9 @@ public class GameManager : MonoBehaviour
             currentState = GameState.Searchig;
             textMessage.ClearText();
             textMessage.WriteText(player.HeroName + " si incammina per la sua strada....");
-            
-            
-            TimerWait.EseguiDopo(2.5f, Explore);
+
+            roomManager.ChangeRoom("Search");
+            TimerWait.EseguiDopo(GameSpeed, Explore);
         }
        
 
@@ -214,6 +218,14 @@ public class GameManager : MonoBehaviour
         Debug.Log(npcSelected);
         return npcSelected;
     }
+    public void CreateNpc()
+    {
+        generateNPC.Generate();
+        GameObject Npc=Instantiate(generateNPC.SfxNpc, SearchSpawn.position,generateNPC.SfxNpc.transform.rotation);
+        currentNPC = Npc;
+        
+        
+    }
     public int RandomizzaNemico()
     {
         int enemy= UnityEngine.Random.Range(0, NumeroNemici.Count);
@@ -267,19 +279,30 @@ public class GameManager : MonoBehaviour
     {
         GoldText.text = wallet.GetGold().ToString();
     }
+
+    public void DoneNPC()
+    {
+        TimerWait.EseguiDopo(GameSpeed, ReturnGameStateBase);
+    }
     public void NpcExecute()
     {
-        int npc = RandomizzaNpc();
-        textMessage.WriteText(NumeroNpc[npc].NpcMessage);
-        if (NumeroNpc[SelectedNpc].takeItem)
-        {
-            TimerWait.EseguiDopo(2.5f, GetItemNpc);
-        }
-        else
-        {
+        CreateNpc();
+        generateNPC.ExecuteNpc();
+        ////int npc = RandomizzaNpc();
+       
+        ////textMessage.WriteText(NumeroNpc[npc].NpcMessage);
+        ////if (NumeroNpc[SelectedNpc].takeItem)
+        ////{
+        ////    TimerWait.EseguiDopo(GameSpeed, GetItemNpc);
+        ////}
+        ////else
+        ////{
 
-            TimerWait.EseguiDopo(intervallo, NpcNoItem);
-        }
+        ////    TimerWait.EseguiDopo(GameSpeed, NpcNoItem);
+        ////}
+        ///
+
+       
     }
     void NpcNoItem()
     {
@@ -296,9 +319,11 @@ public class GameManager : MonoBehaviour
 
     void ReturnGameStateBase()
     {
+        Destroy(currentNPC, 0.1f);
         textMessage.ClearText();
         textMessage.WriteText(player.HeroName + " si incammina....");
-        
+        roomManager.ChangeRoom("world");
+
             currentState = GameState.Idle;
         
     }
@@ -350,6 +375,23 @@ public class GameManager : MonoBehaviour
         PanelUpgradeWeapon.SetActive(false);
         PanelBottega.SetActive(false);
         PanelArmeria.SetActive(true);
+    }
+
+    public void SpeedUpGame()
+    {
+        GameSpeed = 1f;
+        fast = true;
+            Debug.Log("speedup");
+    }
+ public bool GetSpeedGame()
+    {
+        return fast;
+    }
+    public void ReturnNormal()
+    {
+        GameSpeed = 2f;
+        Debug.Log("speedDown");
+        fast = false;
     }
 }
 

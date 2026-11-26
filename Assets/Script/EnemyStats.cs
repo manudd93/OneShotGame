@@ -15,8 +15,11 @@ public class EnemyStats : MonoBehaviour
     public int difesa;
    public bool isDie;
    [SerializeField] float maxBar = 100f;
+
+    SpriteChangeColor spriteChangeColor;
     GameManager gameManager;
     public Image EnemyHealtBar;
+    Animator animator;
     Player player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,6 +27,8 @@ public class EnemyStats : MonoBehaviour
     {
         gameManager = GameObject.FindAnyObjectByType<GameManager>();
         player = GameObject.FindAnyObjectByType<Player>();
+        spriteChangeColor = GetComponent<SpriteChangeColor>();
+        animator = GetComponent<Animator>();
         
        
     }
@@ -48,6 +53,8 @@ public class EnemyStats : MonoBehaviour
         CurrentHealt -= calculateDamage;
         EnemyHealtBar.fillAmount = CurrentHealt / maxBar;
         gameManager.WriteMessage(player.HeroName + " infligge " + calculateDamage);
+        animator.SetTrigger("GetDamage");
+        spriteChangeColor.Flash(Color.red);
        
         if (CurrentHealt <= 0)
         {
@@ -55,6 +62,7 @@ public class EnemyStats : MonoBehaviour
         }
         else
             isDie = false;
+
     }
 
     public void LoadStats(int maxHealt,int minDamage,int maxDamage,int Gold,bool isItem,int speed)

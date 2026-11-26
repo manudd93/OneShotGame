@@ -30,6 +30,7 @@ TagManager:
   - ItemDescription
   - ItemVfx
   - VillageCamera
+  - CameraSearch
   layers:
   - Default
   - TransparentFX

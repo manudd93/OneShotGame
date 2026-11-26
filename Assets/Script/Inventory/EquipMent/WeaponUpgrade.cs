@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class WeaponUpgrade : MonoBehaviour
 {
@@ -8,12 +10,20 @@ public class WeaponUpgrade : MonoBehaviour
     [SerializeField] GameManager gameManager;
     WeaponInstance weaponPresa;
     EquipmentData CurrentEquip;
+    [SerializeField] Image iconWeapon;
+    [SerializeField] TextMeshProUGUI nameWeapon;
+    [SerializeField] TextMeshProUGUI costUpgrade;
+    [SerializeField] TextMeshProUGUI statsChange;
+
     public int CurrentLevel;
     public void LoadStats()
     {
         weaponPresa = player.PrendiDati();
         CurrentEquip = player.PrendiDato();
         CurrentLevel = weaponPresa.Level;
+        nameWeapon.text = CurrentEquip.itemName + " + " + weaponPresa.GetCurrentLevel(); ;
+        iconWeapon.sprite = CurrentEquip.icon;
+        costUpgrade.text = weaponPresa.GetCurrentCost().ToString();
     }
      void Refresh()
     {
@@ -28,7 +38,9 @@ public class WeaponUpgrade : MonoBehaviour
     {
         weaponPresa.TryUpgrade(ref wallet.Gold,wallet);
         Refresh();
+        wallet.RefreshGold();
         player.ReUpdateWeaponUpgraded(CurrentEquip);
+        LoadStats();
         
     }
 }

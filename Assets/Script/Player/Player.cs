@@ -6,9 +6,9 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     //MicroStats
-    public int Healt,MaxHealt, MinDamage,MaxDamage,Critico,Difesa,Abilita,Oneshot,Rapidita;
-    public Image MaxHealtBar,CurrentHealtBar;
-    public  string HeroName;
+    public int Healt, MaxHealt, MinDamage, MaxDamage, Critico, Difesa, Abilita, Oneshot, Rapidita;
+    public Image MaxHealtBar, CurrentHealtBar;
+    public string HeroName;
     float maxBar = 100f;
     float maxBarExp = 100f;
     public int baseDamageMin, baseDamageMax;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] TextMeshProUGUI CriticoText;
     [SerializeField] TextMeshProUGUI OneShotText;
     [SerializeField] TextMeshProUGUI MenteText;
-    public TextMeshProUGUI HeroNameText,MaxHealtText,CurrentHealtText,DamageMinText,DamageMaxText,AbilitaText,RapiditaText,DifesaText;
+    public TextMeshProUGUI HeroNameText, MaxHealtText, CurrentHealtText, DamageMinText, DamageMaxText, AbilitaText, RapiditaText, DifesaText;
     //Macro stats
     public int forza, vitalita, velocita, mente;
     TextMessage textMessage;
@@ -31,7 +31,11 @@ public class Player : MonoBehaviour
     public Animator anim;
     public EquipmentData ArmaDati;
     WeaponInstance weapon;
+
     public int LevelArma;
+
+    [SerializeField] CombatManager combatManager;
+    SpriteChangeColor spriteChangeColor;
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +94,7 @@ public class Player : MonoBehaviour
         baseHealt = MaxHealt;
         baseAbilita = Abilita;
         baseSpeed = Rapidita;
+        spriteChangeColor = GetComponent<SpriteChangeColor>();
         // textMessage.WriteText(HeroName + " inizia la sua avventura...");
        // MaxHealtBar.fillAmount = MaxHealt;
 
@@ -132,6 +137,7 @@ public class Player : MonoBehaviour
         Healt -= calculateDamage;
         CurrentHealtBar.fillAmount = Healt / maxBar;
         gameManager.WriteMessage(gameManager.NumeroNemici[gameManager.SelectedEnemy].EnemyName + " infligge " + calculateDamage);
+        spriteChangeColor.Flash(Color.red);
         if (Healt <= 0)
         {
             Healt = 0;
@@ -179,7 +185,14 @@ public class Player : MonoBehaviour
         this.Rapidita += newEquip.Rapidità;
         this.MaxHealt += newEquip.maxHealt;
         UpdateText();
-        NewEquip(newEquip);
+        if (newEquip.itemType == ItemType.Arma)
+        {
+            NewEquip(newEquip);
+        }
+        if (newEquip.itemType == ItemType.Armatura) { 
+        
+        }
+       
     }
     public void ReUpdateWeaponUpgraded(EquipmentData newEquip)
     {
@@ -198,6 +211,8 @@ public class Player : MonoBehaviour
         UpdateText();
         
     }
+
+    
     void NewEquip(EquipmentData newEquip)
     {
         weapon = new WeaponInstance(newEquip);
@@ -246,7 +261,10 @@ public class Player : MonoBehaviour
 
     }
 
-   
+   public void PlayerInvokeAttack()
+    {
+        combatManager.PlayerExtecuteBasickAttack();
+    }
    
 
     

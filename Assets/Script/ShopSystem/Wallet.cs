@@ -12,11 +12,14 @@ public class Wallet : MonoBehaviour
         if (Gold < amount) return false;
         Gold -= amount;
         OnChanged?.Invoke(Gold);
-        gameManager.RefreshGold();
+        RefreshGold();
         return true;
        
     }
-
+    public void RefreshGold()
+    {
+        gameManager.RefreshGold();
+    }
     public int GetGold()
     {
         return Gold;
